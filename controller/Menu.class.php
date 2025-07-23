@@ -6,4 +6,6 @@ class Menu extends Controller {
         $packages = $model->getAllPackages(); 
         $this->view('menu', ['packages' => $packages]);
     }
+
+    
 }

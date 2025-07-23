@@ -1,3 +1,22 @@
+<?php
+$linkMidtrans = '#'; // default jika paket tidak ditemukan
+
+switch (strtolower($orderDetails['package'] ?? '')) {
+    case 'hemat':
+        $linkMidtrans = 'https://app.sandbox.midtrans.com/payment-links/1753088677395';
+        break;
+    case 'medium':
+        $linkMidtrans = 'https://app.sandbox.midtrans.com/payment-links/1753088759507';
+        break;
+    case 'premium':
+        $linkMidtrans = 'https://app.sandbox.midtrans.com/payment-links/1753088817105';
+        break;
+    default:
+        $linkMidtrans = 'https://app.sandbox.midtrans.com/payment-links/PAKET_DEFAULT_LINK';
+        break;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -76,15 +95,15 @@
                     <span>Total :</span>
                     <span>Rp<?= $total ?></span>
                 </div>
-                <a href="index.php?c=AppController&m=payment"
-                    id="payButton"
-                    class="btn bg-kuning text-dark fw-bold w-100 py-2"
-                    data-package-name="<?= htmlspecialchars($orderDetails['package'] ?? '') ?>"
-                    data-package-price="<?= htmlspecialchars($orderDetails['price'] ?? '') ?>"
-                    data-order-id="<?= htmlspecialchars($orderDetails['orderId'] ?? '') ?>"
-                    data-total-amount="<?= htmlspecialchars($orderDetails['total'] ?? '') ?>">
-                    Bayar
-                </a>
+                <a href="<?= $linkMidtrans ?>"
+    id="payButton"
+    class="btn bg-kuning text-dark fw-bold w-100 py-2"
+    data-package-name="<?= htmlspecialchars($orderDetails['package'] ?? '') ?>"
+    data-package-price="<?= htmlspecialchars($orderDetails['price'] ?? '') ?>"
+    data-order-id="<?= htmlspecialchars($orderDetails['orderId'] ?? '') ?>"
+    data-total-amount="<?= htmlspecialchars($orderDetails['total'] ?? '') ?>">
+    Bayar
+</a>
                 <div id="statusMessage" class="mt-3 text-center" style="color: white;"></div>
             </div>
 
